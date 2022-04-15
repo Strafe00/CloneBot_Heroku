@@ -125,7 +125,7 @@ def choose_folder(update, context):
     page = None
     message_id = -1
     if not query:
-        rsp = update.message.reply_text('⚙️ Getting directory...')
+        rsp = update.message.reply_text('⚙️ Dizin ayarlanıyor...')
         rsp.done.wait(timeout=60)
         message_id = rsp.result().message_id
         if not folders:
