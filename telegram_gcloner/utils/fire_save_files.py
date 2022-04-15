@@ -36,9 +36,9 @@ class MySaveFileThread(threading.Thread):
         chat_id = update.effective_chat.id
         user_id = update.effective_user.id
         gd = GoogleDrive(user_id)
-        message = '╭──────⌈ 📥 Copying ⌋──────╮\n│\n├ 📂 Target directory：{}\n'.format(dest_folder['path'])
+        message = '╭──────⌈ 📥 Kopyalanıyor. ⌋──────╮\n│\n├ 📂 Hedef Dizin：{}\n'.format(dest_folder['path'])
         inline_keyboard = InlineKeyboardMarkup(
-            [[InlineKeyboardButton(text=f'🚫 Stop', callback_data=f'stop_task,{thread_id}')]])
+            [[InlineKeyboardButton(text=f'🚫 Dur.', callback_data=f'stop_task,{thread_id}')]])
 
         reply_message_id = update.callback_query.message.reply_to_message.message_id \
             if update.callback_query.message.reply_to_message else None
@@ -153,13 +153,13 @@ class MySaveFileThread(threading.Thread):
                         progress_checked_files = int(match_checked_files.group(1))
                         progress_total_check_files = int(match_checked_files.group(2))
                     progress_max_percentage_10 = max(progress_size_percentage_10, progress_file_percentage_10)
-                    message_progress = '├ 🗂 Source : <a href="https://drive.google.com/open?id={}">{}</a>\n│\n' \
-                                       '├ ✔️ Checks： <code>{} / {}</code>\n' \
-                                       '├ 📥 Transfers： <code>{} / {}</code>\n' \
-                                       '├ 📦 Size：<code>{} / {}</code>\n{}' \
-                                       '├ ⚡️Speed：<code>{}</code> \n├⏳ ETA: <code>{}</code>\n' \
-                                       '├ ⛩ Progress：[<code>{}</code>] {: >4}%\n│\n' \
-                                       '├──────⌈ ⚡️ CloneBot ⌋──────' \
+                    message_progress = '├ 🗂 Kaynak: <a href="https://drive.google.com/open?id={}">{}</a>\n│\n' \
+                                       '├ ✔️ Kontrol： <code>{} / {}</code>\n' \
+                                       '├ 📥 Transfer： <code>{} / {}</code>\n' \
+                                       '├ 📦 Boyut：<code>{} / {}</code>\n{}' \
+                                       '├ ⚡ Hız：<code>{}</code> \n├⏳ Tahmini Kalan Süre: <code>{}</code>\n' \
+                                       '├ ⛩ İşlem：[<code>{}</code>] {: >4}%\n│\n' \
+                                       '├──────⌈ ⚡️ Kolanlama Botu ⌋──────' \
                         .format(
                         folder_id,
                         html.escape(destination_path),
@@ -264,7 +264,7 @@ class MySaveFileThread(threading.Thread):
             if self.critical_fault is True:
                 break
 
-        message += '\n╰──────⌈ ✅ Finished ! ⌋──────╯'
+        message += '\n╰──────⌈ ✅ Tamamlandı! ⌋──────╯'
         try:
             context.bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=message,
                                           parse_mode=ParseMode.HTML, disable_web_page_preview=True)
