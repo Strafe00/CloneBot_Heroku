@@ -56,7 +56,7 @@ def chosen_folder(update, context):
         gd = GoogleDrive(update.effective_user.id)
     except Exception as e:
         context.bot.send_message(chat_id=update.effective_user.id,
-                                 text='🔸 Please make sure the SA archive has been uploaded and the collection folder has been configured.\n'
+                                 text='🔸 SA arşivinin yüklendiğinden ve koleksiyon klasörünün yapılandırıldığından emin olun.\n'
                                       '<code>{}</code>'.format(html.escape(str(e))),
                                  parse_mode=ParseMode.HTML)
         return
@@ -103,7 +103,7 @@ def choose_folder(update, context):
         gd = GoogleDrive(update.effective_user.id)
     except Exception as e:
         context.bot.send_message(chat_id=update.effective_user.id,
-                                 text='🔸 Please make sure the SA archive has been uploaded and the collection folder has been configured.\n'
+                                 text='🔸 SA arşivinin yüklendiğinden ve koleksiyon klasörünün yapılandırıldığından emin olun.\n'
                                       '<code>{}</code>'.format(html.escape(str(e))),
                                  parse_mode=ParseMode.HTML)
         return
@@ -171,7 +171,7 @@ def choose_folder(update, context):
                 folders = gd.get_drives()
                 context.user_data[udkey_folders_cache] = copy.deepcopy(folders)
             if not folders:
-                folders = {'#': 'If you have no shared drives, go to @MsGsuite to get one.'}
+                folders = {'#': 'Eğer Team Driveınız yoksa lütfen bir tane edinin.'}
         else:
             alert_users(context, update.effective_user, 'invalid query data', query.data)
             query.answer(text='Yo-he!', show_alert=True)
@@ -211,14 +211,14 @@ def choose_folder(update, context):
                     0, [InlineKeyboardButton('📁' + current_path,
                                              callback_data=callback_query_prefix)])
             inline_keyboard_drive_ids.append(
-                [InlineKeyboardButton('✔️ Select this folder({})'.format(current_folder_name),
+                [InlineKeyboardButton('✔️ Dosya seçildi.({})'.format(current_folder_name),
                                       callback_data='chosen_folder,{}'.format(current_folder_id))])
     inline_keyboard_drive_ids.append([InlineKeyboardButton('🔙 Go back',
                                                            callback_data='choose_folder' if current_folder_id else '#'),
                                       InlineKeyboardButton('Cancel', callback_data='cancel')])
     context.bot.edit_message_text(chat_id=update.effective_chat.id,
                                   message_id=message_id,
-                                  text='🔶 Select the directory you want to use, there are {} subdirectories.'.format(
+                                  text='🔶 İstediğiniz dizini seçiniz. {} altdizin bulunuyor.'.format(
                                       folders_len),
                                   reply_markup=InlineKeyboardMarkup(inline_keyboard_drive_ids))
 
@@ -263,12 +263,12 @@ def set_folders(update, context):
         inline_keyboard_drive_ids = []
         folder_ids_len = 0
     if folder_ids_len < max_folders:
-        inline_keyboard_drive_ids.insert(0, [InlineKeyboardButton('➕ Add favorite folder', callback_data=callback_query_prefix)])
-    inline_keyboard_drive_ids.append([InlineKeyboardButton('✔️ Done', callback_data='cancel')])
+        inline_keyboard_drive_ids.insert(0, [InlineKeyboardButton('➕ Favori klasör yap.', callback_data=callback_query_prefix)])
+    inline_keyboard_drive_ids.append([InlineKeyboardButton('✔️ Tamamlandı', callback_data='cancel')])
 
     context.bot.edit_message_text(chat_id=update.effective_chat.id,
                                   message_id=message_id,
-                                  text='📁 Total {}/{} Destination Folders ：'.format(
+                                  text='📁 Toplam {}/{} Hedef Klasör ：'.format(
                                       folder_ids_len,
                                       max_folders,
                                   ),
