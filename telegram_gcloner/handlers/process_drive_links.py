@@ -65,23 +65,23 @@ def process_drive_links(update, context):
 
     if not folder_ids:
         return
-    message = '📑 The following files were detected :\n'
+    message = '📑 Dosyalar algılandı. :\n'
 
     try:
         gd = GoogleDrive(update.effective_user.id)
     except Exception as e:
-        update.message.reply_text('🔸 Please make sure the SA archive has been uploaded and the collection folder has been configured.\n{}'.format(e))
+        update.message.reply_text('🔸Lütfen SA Arşivini yüklediğinizden emin olun.\n{}'.format(e))
         return
 
     for item in folder_ids:
         try:
             folder_name = gd.get_file_name(item)
         except Exception as e:
-            update.message.reply_text('🔸 Please make sure that the SA archive has been uplaoded and that the SA has permission to access the link.\n{}'.format(e))
+            update.message.reply_text('🔸Lütfen SA arşivini yüklediğinizden ve SAların dosyaya erişimi olduğundan emin olunuz. n{}'.format(e))
             return
         message += '     <a href="https://drive.google.com/open?id={}">{}</a>\n'.format(
             item, html.escape(folder_name))
-    message += '\n📂 Please select the target destination'
+    message += '\n📂 Hedefi seçiniz.
     fav_folder_ids = context.user_data.get(udkey_folders, None)
 
     callback_query_prefix = 'save_to_folder'
