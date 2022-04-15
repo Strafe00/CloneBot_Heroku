@@ -22,7 +22,7 @@ class _Config:
         self._gclone_para_override = ''
         self._base_path = os.path.dirname(os.path.dirname(__file__))
         self.TIMER_TO_DELETE_MESSAGE = 10
-        self.AD_STRING = ' Goodbye, please talk to the bot<a href="{}"> privately.</a>'
+        self.AD_STRING = ' Görüşürüz, Lütfen Botla <a href="{}"> Özelden.</a> Konuşunuz.'
 
     def load_config(self):
         logger.debug('Loading config')
@@ -32,12 +32,12 @@ class _Config:
             config_file.read(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config.ini'), encoding='utf-8')
         except IOError as err:
             logger.warning("Can't open the config file: ", err)
-            input('Press enter to exit.')
+            input('Çıkmak için enter\'a basın.')
             sys.exit(1)
 
         if not config_file.has_section('General'):
             logger.warning("Can't find General section in config.")
-            input('Press enter to exit.')
+            input('Çıkmak için enter\'a basın.')
             sys.exit(1)
 
         config_general = config_file['General']
@@ -58,13 +58,13 @@ class _Config:
             self._path_to_gclone = shutil.which('gclone')
             if not self._path_to_gclone:
                 logger.warning('gclone executable is not found.')
-                input("Press Enter to continue...")
+                input("Devam etmek için enter\'a basın.")
                 sys.exit(0)
         logger.info('Found gclone: ' + self._path_to_gclone)
 
         if not self._telegram_token:
             logger.warning('telegram token is not provided.')
-            input("Press Enter to continue...")
+            input("Devam etmek için enter\'a basın.")
             sys.exit(0)
         logger.info('Found token: ' + self._telegram_token)
 
@@ -83,7 +83,7 @@ class _Config:
                 raise TypeError
             if not optional and not value and value is not False:
                 logger.warning('{} is not provided.'.format(item))
-                input("Press Enter to continue...")
+                input("Devam etmek için enter\'a basın.")
                 sys.exit(1)
             logger.info('Found {}: {}'.format(item, value))
             setattr(self, '_' + item, value)
