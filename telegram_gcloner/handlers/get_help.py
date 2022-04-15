@@ -18,17 +18,17 @@ def init(dispatcher: Dispatcher):
 
 @restricted
 def get_help(update, context):
-    message = 'Send a Google Drive link, or forward a message with a Google Drive link to manually transfer.\n' \
-              'Configuration with /sa and /folders is required.\n\n' \
-              '📚 Commands:\n' \
-              ' │ /start - Start the Bot' \
-              ' │ /folders - Set favorite folders\n' \
-              ' │ /sa - Private chat only, upload a ZIP containing SA accounts with this command as the subject.\n' \
-              ' │ /ban - Ban a Telegram User ID from using the Bot' \
-              ' │ /unban - Reallow a Telegram User ID from using the Bot that was earlier banned' \
-              ' │ /id - Get your Telegram User  ID' \
-              ' │ /contact - Get the contacts details of the owner of the Bot' \
-              ' │ /help - Output this message\n'
+    message = 'Google Drive linkini gönderin, veya Google drive linki olan bir dosyayı elle transfer için iletin.\n' \
+              'Yapılandırmak için /sa ve /folders komutları gereklidir.\n\n' \
+              '📚 Komutlar:\n' \
+              ' │ /start - Botu başlatır.' \
+              ' │ /folders - favori klasörü seçer.' \
+              ' │ /sa - Sadece direkt mesajda. İçinde Servis hesapları olan dosyayı seçmenize olanak sağlar.\n' \
+              ' │ /ban - Bir kişi, bu botu kullanmaktan men eder.' \
+              ' │ /unban - Men edilmiş kullanıcının bota erişmesine tekrar izin verilir.' \
+              ' │ /id - Kullanıcı ID\'ni verir.' \
+              ' │ /contact - Botun sahibine mesaj gönderir.' \
+              ' │ /help - Bu mesajı gönderir.\n'
 
     rsp = update.message.reply_text(message)
     rsp.done.wait(timeout=60)
